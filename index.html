@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabalho Humberto de Campos 2026 | Trindade-GO</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Paytone+One&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         :root {
             --primary-red: #E63946;
@@ -139,7 +142,7 @@
         .tag-green { border-bottom-color: var(--green-accent); }
         .tag-green h3 { color: var(--green-accent); }
 
-        /* Formulário de Inscrição Disney Level */
+        /* Formulário de Inscrição */
         .form-container {
             background: #fff;
             padding: 40px;
@@ -148,6 +151,11 @@
             max-width: 600px;
             margin: 0 auto;
             border: 2px solid #f1f1f1;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .form-group {
@@ -190,6 +198,7 @@
             transition: background 0.3s, transform 0.2s;
             font-family: 'Paytone One', sans-serif;
             letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
         }
 
         button:hover {
@@ -201,25 +210,45 @@
             background-color: #ccc;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
-        /* Mensagem de Sucesso */
-        #mensagem-sucesso {
+        /* Tela de Sucesso Ultra Emocionante */
+        #success-screen {
             display: none;
             text-align: center;
-            background: #e8f5e9;
-            color: #2e7d32;
             padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            font-weight: 600;
-            border: 1px solid #c8e6c9;
-            animation: fadeIn 0.5s;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        #success-screen h2 {
+            color: var(--green-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #success-screen p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         footer {
@@ -230,7 +259,6 @@
             font-size: 0.9rem;
         }
 
-        /* Palavras flutuantes decorativas */
         .floating-word {
             position: absolute;
             font-family: 'Paytone One', sans-serif;
@@ -306,7 +334,7 @@
                 
                 <div class="form-group">
                     <label for="telefone">WhatsApp</label>
-                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
                 </div>
 
                 <div class="form-group">
@@ -322,8 +350,13 @@
                 <button type="submit" id="btnSubmit">CONFIRMAR MINHA PRESENÇA</button>
             </form>
 
-            <div id="mensagem-sucesso">
-                ✨ Inscrição recebida com sucesso! Que Jesus te abençoe, nos vemos lá!
+            <div id="success-screen">
+                <div class="success-icon">✨💛✨</div>
+                <h2>PRESENÇA CONFIRMADA!</h2>
+                <p><strong>Sua disposição em servir acendeu uma luz linda!</strong></p>
+                <p style="color: #555; font-size: 0.95rem; max-width: 450px; margin: 0 auto;">
+                    Seus dados foram enviados diretamente para a Secretaria do evento. Prepare o coração para uma tarde inesquecível de amor e caridade. Que Jesus te abençoe!
+                </p>
             </div>
         </div>
     </section>
@@ -334,37 +367,83 @@
     </footer>
 
     <script>
-        // COLOQUE AQUI A URL DO SEU GOOGLE APPS SCRIPT
+        // URL do Google Apps Script fornecida
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzbTHcAV6hhkBR-2y7Y7P8zKpP6nhnLSZMEs7jrAbrf4nl9Qqsd9-cU883bxSXa_BShmQ/exec'; 
         
         const form = document.getElementById('inscricaoForm');
         const btnSubmit = document.getElementById('btnSubmit');
-        const mensagemSucesso = document.getElementById('mensagem-sucesso');
+        const successScreen = document.getElementById('success-screen');
+        const telInput = document.getElementById('telefone');
 
+        // MÁSCARA DE TELEFONE (xx) xxxxx-xxxx
+        telInput.addEventListener('input', (e) => {
+            let input = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+            if (input.length === 0) {
+                e.target.value = '';
+                return;
+            }
+            if (input.length <= 2) {
+                e.target.value = `(${input}`;
+            } else if (input.length <= 7) {
+                e.target.value = `(${input.slice(0, 2)}) ${input.slice(2)}`;
+            } else {
+                e.target.value = `(${input.slice(0, 2)}) ${input.slice(2, 7)}-${input.slice(7, 11)}`;
+            }
+        });
+
+        // ENVIO DO FORMULÁRIO + CONFETES
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // UX: Muda o botão enquanto carrega
             btnSubmit.disabled = true;
-            btnSubmit.innerText = 'Enviando... 💛';
+            btnSubmit.innerText = 'Enviando com amor... 💛';
 
-            // Pega os dados do form
             let requestBody = new FormData(form);
 
             fetch(scriptURL, { method: 'POST', body: requestBody })
                 .then(response => {
-                    // UX: Mostra mensagem de sucesso e reseta o formulário
+                    // Esconde o formulário com suavidade e mostra a tela comemorativa
                     form.style.display = 'none';
-                    mensagemSucesso.style.display = 'block';
+                    successScreen.style.display = 'block';
+                    
+                    // DISPARO DOS CONFETES (Efeito Disney)
+                    DispararConfetes();
                 })
                 .catch(error => {
-                    alert('Ops! Houve um erro na conexão. Tente novamente.');
+                    alert('Ops! Houve um problema na conexão. Por favor, tente novamente.');
                     btnSubmit.disabled = false;
                     btnSubmit.innerText = 'CONFIRMAR MINHA PRESENÇA';
                 });
         });
+
+        // Função para criar uma explosão festiva de confetes
+        function DispararConfetes() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                // Confetes do lado esquerdo
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 },
+                    colors: ['#FFCA3A', '#E63946', '#2A9D8F', '#F1FAEE']
+                });
+                // Confetes do lado direito
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 },
+                    colors: ['#FFCA3A', '#E63946', '#2A9D8F', '#F1FAEE']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
     </script>
 </body>
 </html>
-
-```
