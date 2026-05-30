@@ -18,41 +18,86 @@
             --green-accent: #2A9D8F;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-dark);
+            line-height: 1.6;
+            /* Fundo original restaurado */
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+            background-size: 20px 20px;
             overflow-x: hidden;
-            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
-            background-size: 30px 30px;
         }
 
-        /* Hero / Cabeçalho */
+        /* Tipografia de Destaque */
+        h1, h2, h3 {
+            font-family: 'Paytone One', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section Original */
         .hero {
             background-color: var(--text-dark);
             color: var(--text-light);
             text-align: center;
-            padding: 60px 15px 80px;
+            padding: 80px 20px;
             position: relative;
             overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
+        /* Título MAIOR */
         .hero h1 {
-            font-family: 'Paytone One', sans-serif;
-            font-size: clamp(2rem, 10vw, 3.8rem);
+            font-size: 4.5rem; /* Aumentado */
             color: var(--primary-yellow);
             text-shadow: 4px 4px 0px var(--primary-red);
-            line-height: 1.1;
-            z-index: 10;
+            transform: rotate(-2deg);
             margin-bottom: 20px;
-            transform: rotate(-1deg);
+            display: inline-block;
+            line-height: 1.1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-badge {
+            background: rgba(255,255,255,0.1); 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            display: inline-block; 
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote {
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            border-left: 4px solid var(--primary-yellow);
+            display: inline-block;
+            padding-left: 15px;
+            margin-top: 20px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
         /* Sistema de Balões Interativos */
@@ -63,15 +108,16 @@
             top: 0;
             left: 0;
             pointer-events: none;
+            z-index: 1;
         }
 
         .balloon {
             position: absolute;
             width: 70px;
             height: 85px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(4px);
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             cursor: pointer;
             pointer-events: auto;
@@ -81,7 +127,7 @@
             font-weight: 800;
             color: transparent;
             transition: all 0.3s ease;
-            box-shadow: inset -10px -10px 15px rgba(255,255,255,0.2);
+            box-shadow: inset -10px -10px 15px rgba(255,255,255,0.1);
             animation: float 6s infinite ease-in-out;
         }
 
@@ -136,69 +182,182 @@
             100% { transform: scale(1); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         }
 
-        /* Seções e Cards */
+        /* Seções Gerais */
         .section-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 40px;
+        }
+
+        /* Cards de Programação Original (Lado a Lado) */
+        .grid-programacao {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .card {
             background: #fff;
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border-left: 8px solid var(--primary-yellow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid var(--primary-yellow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .card h3 { color: var(--primary-red); margin-bottom: 10px; font-size: 1.4rem; }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
 
-        /* Formulário */
+        .card h3 {
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .tag-green { border-bottom-color: var(--green-accent); }
+        .tag-green h3 { color: var(--green-accent); }
+
+        /* Formulário de Inscrição */
         .form-container {
             background: #fff;
-            padding: 30px 20px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-top: 20px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #f1f1f1;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
         .form-group input {
             width: 100%;
             padding: 15px;
-            border: 2px solid #eee;
+            border: 2px solid #e1e1e1;
             border-radius: 12px;
-            font-size: 16px; /* Evita zoom no iPhone */
+            font-size: 16px;
             font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 0 4px rgba(255, 202, 58, 0.2);
         }
 
         button.main-btn {
             width: 100%;
-            background: var(--primary-red);
+            background-color: var(--primary-red);
             color: white;
             border: none;
-            padding: 20px;
-            border-radius: 15px;
-            font-family: 'Paytone One', sans-serif;
+            padding: 18px;
             font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 12px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+            font-family: 'Paytone One', sans-serif;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .hero { padding-top: 40px; }
-            .hero h1 { font-size: 2.5rem; }
-            .btn-flutuante { width: calc(100% - 50px); left: 25px; justify-content: center; }
-            .section-container { padding: 30px 15px; }
+        button.main-btn:hover {
+            background-color: #d62828;
+            transform: scale(1.02);
         }
 
+        button.main-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Tela de Sucesso */
         #success-screen {
             display: none;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        #success-screen h2 {
+            color: var(--green-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #success-screen p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--text-dark);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Ajustes para Celular */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3rem; } /* Mantém bem grande, mas cabendo na tela */
+            .btn-flutuante { width: calc(100% - 50px); left: 25px; justify-content: center; }
         }
     </style>
 </head>
@@ -211,74 +370,98 @@
     <header class="hero">
         <div class="balloon-area" id="balloonArea"></div>
         
-        <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.8; margin-bottom: 10px;">Edição 2026 • Trindade - GO</p>
-        <h1 id="mainTitle">TRABALHO<br>HUMBERTO<br>DE CAMPOS</h1>
+        <h1>TRABALHO<br>HUMBERTO DE CAMPOS</h1>
+        <p class="subtitle">Edição 2026 • Trindade - GO</p>
         
-        <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 20px; backdrop-filter: blur(5px); margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); max-width: 90%;">
-            <strong>📍 Concentração:</strong> Posto Uma Gotinha de Amor<br> 
+        <div class="info-badge">
+            <strong>📍 Concentração:</strong> Posto Uma Gotinha de Amor <br> 
             <strong>📅 14 de Junho</strong> às <strong>14H</strong>
+        </div><br>
+
+        <div class="quote">
+            "Está na luz da Humildade<br>A caridade melhor."<br>
+            <span style="font-size: 0.9rem; font-weight: 600;">— Casimiro Cunha</span>
         </div>
 
-        <p style="font-style: italic; max-width: 300px; opacity: 0.9;">"Está na luz da Humildade a caridade melhor."<br><strong>— Casimiro Cunha</strong></p>
-        
-        <p style="margin-top: 30px; font-size: 0.8rem; font-weight: 600; color: var(--primary-yellow); animation: pulse 2s infinite;">🎈 Toque nos balões para liberar boas energias!</p>
+        <p style="margin-top: 40px; font-size: 0.9rem; font-weight: 600; color: var(--primary-yellow); animation: pulse 2s infinite; position: relative; z-index: 2;">🎈 Toque nos balões para liberar boas energias!</p>
     </header>
 
-    <main class="section-container">
-        <h2 style="text-align: center; font-family: 'Paytone One'; color: var(--primary-red); margin-bottom: 30px;">FRENTES DE LUZ</h2>
+    <section class="section-container" id="programacao">
+        <h2 class="section-title">Nossas Frentes de Trabalho</h2>
         
-        <div class="card">
-            <h3>💧 Gotinha de Amor</h3>
-            <p>Reforma, pinturas artísticas e melhorias estruturais no posto de assistência.</p>
-        </div>
+        <div class="grid-programacao">
+            <div class="card tag-green">
+                <h3>💧 Posto Uma Gotinha de Amor</h3>
+                <p>Pintura externa e interna, pinturas artísticas, iluminação e melhorias nas paredes e estrutura.</p>
+            </div>
 
-        <div class="card" style="border-left-color: var(--green-accent);">
-            <h3>🎗️ Campanha Camilo Castelo Branco</h3>
-            <p>Prevenção ao suicídio e valorização da vida através de faixas e mensagens de esclarecimento.</p>
-        </div>
+            <div class="card">
+                <h3>🎗️ Campanha Camilo Castelo Branco</h3>
+                <p>Campanha de prevenção ao suicídio, com conscientização e esclarecimento por meio de faixas, mensagens de apoio e valorização da vida.</p>
+            </div>
 
-        <div class="card" style="border-left-color: var(--text-dark);">
-            <h3>🏠 Assistência Fraterna</h3>
-            <p>Ações de carinho e apoio na Vila São Cotolengo, Abrigos e Hospitais da região.</p>
-        </div>
+            <div class="card">
+                <h3>🏥 Vila São Cotolengo</h3>
+                <p>Ações de assistência, acolhimento e afeto na instituição.</p>
+            </div>
 
-        <div id="inscricao" style="padding-top: 60px;">
-            <h2 style="text-align: center; font-family: 'Paytone One'; color: var(--primary-red); margin-bottom: 10px;">VEM COM A GENTE!</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">Sua ajuda é o combustível dessa jornada.</p>
+            <div class="card">
+                <h3>👶👵 Abrigo (Crianças ou Idosos)</h3>
+                <p>Atividades de carinho, acolhimento e interação.</p>
+            </div>
 
-            <div class="form-container">
-                <form id="inscricaoForm">
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" name="nome" placeholder="Seu nome aqui" required>
-                    </div>
-                    <div class="form-group">
-                        <label>WhatsApp</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Centro Espírita</label>
-                        <input type="text" name="centro" placeholder="Qual casa você frequenta?" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Cidade</label>
-                        <input type="text" name="cidade" placeholder="Ex: Trindade - GO" required>
-                    </div>
-                    <button type="submit" class="main-btn" id="btnSubmit">CONFIRMAR MINHA PRESENÇA 💛</button>
-                </form>
-
-                <div id="success-screen">
-                    <h2 style="color: var(--green-accent); font-family: 'Paytone One';">INSCRITO COM SUCESSO!</h2>
-                    <p style="margin: 20px 0;">Sua luz foi somada à nossa. Prepare o coração!</p>
-                    <div style="font-size: 4rem;">✨🙌✨</div>
-                </div>
+            <div class="card">
+                <h3>🚑 Hospital ou IML</h3>
+                <p>Apoio fraterno e irradiação de paz aos corações que necessitam.</p>
             </div>
         </div>
-    </main>
+    </section>
 
-    <footer style="background: var(--text-dark); color: white; text-align: center; padding: 40px 20px;">
-        <p>Fraternidade • Fé • Auxílio • Caridade</p>
-        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 10px;">Humberto de Campos 2026</p>
+    <section class="section-container" id="inscricao" style="background-color: #fff; border-radius: 30px; margin-bottom: 60px; padding-top: 60px;">
+        <h2 class="section-title" style="margin-bottom: 10px;">Vem com a gente! 💛</h2>
+        <p style="text-align: center; margin-bottom: 30px; color: #666;">
+            Preencha seus dados abaixo para se voluntariar. A Secretaria fará a organização e distribuição das atividades.
+        </p>
+
+        <div class="form-container">
+            <form id="inscricaoForm">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Como você gosta de ser chamado(a)?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">WhatsApp</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="centro">Centro Espírita que frequenta</label>
+                    <input type="text" id="centro" name="centro" placeholder="Ex: Casa Espírita Luz e Amor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cidade">Sua Cidade</label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Ex: Goiânia - GO" required>
+                </div>
+
+                <button type="submit" class="main-btn" id="btnSubmit">CONFIRMAR MINHA PRESENÇA</button>
+            </form>
+
+            <div id="success-screen">
+                <div class="success-icon">✨💛✨</div>
+                <h2>PRESENÇA CONFIRMADA!</h2>
+                <p><strong>Sua disposição em servir acendeu uma luz linda!</strong></p>
+                <p style="color: #555; font-size: 0.95rem; max-width: 450px; margin: 0 auto;">
+                    Seus dados foram enviados diretamente para a Secretaria do evento. Prepare o coração para uma tarde inesquecível de amor e caridade. Que Jesus te abençoe!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Fraternidade • Fé • Auxílio • Luz • Amor • Bondade</p>
+        <p style="opacity: 0.7; margin-top: 10px; font-size: 0.8rem;">Trabalho Humberto de Campos 2026</p>
     </footer>
 
     <script>
@@ -290,7 +473,6 @@
             const b = document.createElement('div');
             b.className = 'balloon';
             
-            // Posição aleatória ao redor do título
             const x = Math.random() * 80 + 10;
             const y = Math.random() * 60 + 20;
             const delay = Math.random() * 5;
@@ -304,7 +486,6 @@
                     b.classList.add('popped');
                     b.innerText = words[Math.floor(Math.random() * words.length)];
                     
-                    // Mini explosão de confete ao estourar
                     confetti({
                         particleCount: 40,
                         spread: 70,
@@ -315,53 +496,82 @@
                         colors: ['#FFCA3A', '#FFFFFF']
                     });
 
-                    // Remove depois de um tempo
                     setTimeout(() => { b.style.opacity = '0'; }, 2000);
                 }
             };
             area.appendChild(b);
         }
 
-        // Cria 6 balões iniciais
+        // Cria balões iniciais
         for(let i=0; i<6; i++) createBalloon();
 
         // 2. Máscara de Telefone
         const telInput = document.getElementById('telefone');
         telInput.addEventListener('input', (e) => {
             let input = e.target.value.replace(/\D/g, '');
-            if (input.length <= 2) e.target.value = input.length > 0 ? `(${input}` : '';
-            else if (input.length <= 7) e.target.value = `(${input.slice(0, 2)}) ${input.slice(2)}`;
-            else e.target.value = `(${input.slice(0, 2)}) ${input.slice(2, 7)}-${input.slice(7, 11)}`;
+            if (input.length === 0) {
+                e.target.value = '';
+                return;
+            }
+            if (input.length <= 2) {
+                e.target.value = `(${input}`;
+            } else if (input.length <= 7) {
+                e.target.value = `(${input.slice(0, 2)}) ${input.slice(2)}`;
+            } else {
+                e.target.value = `(${input.slice(0, 2)}) ${input.slice(2, 7)}-${input.slice(7, 11)}`;
+            }
         });
 
         // 3. Envio e Confetes Finais
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzbTHcAV6hhkBR-2y7Y7P8zKpP6nhnLSZMEs7jrAbrf4nl9Qqsd9-cU883bxSXa_BShmQ/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzbTHcAV6hhkBR-2y7Y7P8zKpP6nhnLSZMEs7jrAbrf4nl9Qqsd9-cU883bxSXa_BShmQ/exec'; 
+        
         const form = document.getElementById('inscricaoForm');
-        const btn = document.getElementById('btnSubmit');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const successScreen = document.getElementById('success-screen');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            btn.disabled = true;
-            btn.innerText = 'Enviando...';
+            
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = 'Enviando com amor... 💛';
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(res => {
-                form.style.display = 'none';
-                document.getElementById('success-screen').style.display = 'block';
-                
-                // Explosão ÉPICA de confetes
-                var end = Date.now() + (4 * 1000);
-                (function frame() {
-                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: ['#FFCA3A', '#E63946'] });
-                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: ['#FFCA3A', '#E63946'] });
-                    if (Date.now() < end) requestAnimationFrame(frame);
-                }());
-            })
-            .catch(err => {
-                alert('Erro ao enviar. Verifique sua conexão.');
-                btn.disabled = false;
-                btn.innerText = 'TENTAR NOVAMENTE';
-            });
+            let requestBody = new FormData(form);
+
+            fetch(scriptURL, { method: 'POST', body: requestBody })
+                .then(response => {
+                    form.style.display = 'none';
+                    successScreen.style.display = 'block';
+                    
+                    // Explosão ÉPICA de confetes
+                    var duration = 4 * 1000;
+                    var end = Date.now() + duration;
+
+                    (function frame() {
+                        confetti({
+                            particleCount: 5,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0, y: 0.6 },
+                            colors: ['#FFCA3A', '#E63946', '#2A9D8F', '#F1FAEE']
+                        });
+                        confetti({
+                            particleCount: 5,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1, y: 0.6 },
+                            colors: ['#FFCA3A', '#E63946', '#2A9D8F', '#F1FAEE']
+                        });
+
+                        if (Date.now() < end) {
+                            requestAnimationFrame(frame);
+                        }
+                    }());
+                })
+                .catch(error => {
+                    alert('Ops! Houve um problema na conexão. Por favor, tente novamente.');
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = 'CONFIRMAR MINHA PRESENÇA';
+                });
         });
     </script>
 </body>
