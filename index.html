@@ -16,6 +16,8 @@
             --text-dark: #1D3557;
             --text-light: #F1FAEE;
             --green-accent: #2A9D8F;
+            --green-shiny: #10ac84;
+            --green-shiny-light: #1dd1a1;
         }
 
         * {
@@ -71,46 +73,51 @@
             z-index: 2;
         }
 
-        /* INFORMAÇÃO DE CONCENTRAÇÃO: Menor e com Alto Contraste */
+        /* INFORMAÇÃO DE CONCENTRAÇÃO: Aumentado em 20% */
         .info-badge {
             background: var(--primary-yellow);
             color: var(--text-dark);
-            padding: 8px 25px; 
+            padding: 10px 30px; 
             border-radius: 50px; 
             display: inline-block; 
             margin-bottom: 20px;
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: 800;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             position: relative;
             z-index: 2;
         }
 
-        /* FRASE CASIMIRO CUNHA: Bem menor e sutil */
+        /* FRASE CASIMIRO CUNHA: Aumentado em 20% */
         .quote {
             font-style: italic;
             font-weight: 300;
-            font-size: 0.75rem;
-            opacity: 0.7;
-            border-left: 2px solid var(--primary-yellow);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            border-left: 3px solid var(--primary-yellow);
             display: inline-block;
-            padding-left: 10px;
+            padding-left: 12px;
             margin-top: 15px;
             text-align: left;
             position: relative;
             z-index: 2;
-            max-width: 250px;
+            max-width: 300px;
         }
 
-        /* SISTEMA DE BALÕES 3D (Primeira Camada) */
+        .quote span {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* SISTEMA DE BALÕES 3D (Z-Index Ajustado para Cobrir TUDO) */
         .balloon-area {
-            position: fixed; /* Fixo para cobrir toda a tela, mesmo rolando */
+            position: fixed; 
             width: 100vw;
             height: 100vh;
             top: 0;
             left: 0;
-            pointer-events: none; /* Permite clicar nos botões por baixo */
-            z-index: 998; /* Fica em cima de TUDO (exceto o botão flutuante) */
+            pointer-events: none; 
+            z-index: 9999; /* Agora passa sobre o formulário sem dúvidas */
             overflow: hidden;
         }
 
@@ -118,25 +125,23 @@
             position: absolute;
             width: 60px;
             height: 75px;
-            /* Efeito 3D Esférico Realista */
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.1) 60%, rgba(0, 0, 0, 0.1) 100%);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             cursor: pointer;
-            pointer-events: auto; /* Balão é clicável */
+            pointer-events: auto; 
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             color: transparent;
             transition: transform 0.2s ease, opacity 0.5s ease;
-            /* Sombras internas e externas para volume 3D */
             box-shadow: 
                 inset -8px -8px 15px rgba(0,0,0,0.15),
                 inset 8px 8px 15px rgba(255,255,255,0.7),
                 0 10px 20px rgba(0,0,0,0.2);
-            top: 100vh; /* Nascem embaixo da tela */
+            top: 100vh; 
         }
 
         .balloon::after {
@@ -156,13 +161,12 @@
             color: var(--primary-yellow);
             font-size: 1.5rem;
             text-shadow: 0 0 15px rgba(255,202,58,0.9), 0 0 5px #000;
-            pointer-events: none; /* Após estourar, não atrapalha cliques */
-            animation-play-state: paused; /* Para de subir */
+            pointer-events: none; 
+            animation-play-state: paused; 
         }
 
         .balloon.popped::after { display: none; }
 
-        /* Animação orgânica de flutuar pela tela toda */
         @keyframes floatAndSway {
             0% { transform: translateY(10vh) translateX(0) rotate(-5deg); }
             25% { transform: translateY(-25vh) translateX(30px) rotate(5deg); }
@@ -176,7 +180,7 @@
             position: fixed;
             bottom: 25px;
             right: 25px;
-            z-index: 999;
+            z-index: 9998;
             background: var(--primary-yellow);
             color: var(--text-dark);
             padding: 15px 25px;
@@ -189,6 +193,7 @@
             gap: 10px;
             animation: pulse-button 2s infinite;
             border: 2px solid white;
+            transition: opacity 0.5s ease, transform 0.3s ease;
         }
 
         @keyframes pulse-button {
@@ -286,9 +291,10 @@
             box-shadow: 0 0 0 4px rgba(255, 202, 58, 0.2);
         }
 
+        /* BOTÃO VERDE BRILHOSO */
         button.main-btn {
             width: 100%;
-            background-color: var(--primary-red);
+            background: linear-gradient(135deg, var(--green-shiny), var(--green-shiny-light));
             color: white;
             border: none;
             padding: 18px;
@@ -296,13 +302,41 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: all 0.3s;
             font-family: 'Paytone One', sans-serif;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+            box-shadow: 0 8px 20px rgba(29, 209, 161, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
-        button.main-btn:hover { background-color: #d62828; transform: scale(1.02); }
-        button.main-btn:disabled { background-color: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* Efeito de Reflexo (Brilho que passa pelo botão) */
+        button.main-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        button.main-btn:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 10px 25px rgba(29, 209, 161, 0.6); 
+        }
+        
+        button.main-btn:disabled { 
+            background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; 
+        }
+        button.main-btn:disabled::after { display: none; }
 
         #success-screen {
             display: none;
@@ -328,7 +362,7 @@
 
     <div class="balloon-area" id="balloonArea"></div>
 
-    <a href="#inscricao" class="btn-flutuante">
+    <a href="#inscricao" class="btn-flutuante" id="btnFlutuante">
         <span>Quero me voluntariar! 💛</span>
     </a>
 
@@ -342,7 +376,7 @@
 
         <div class="quote">
             "Está na luz da Humildade a caridade melhor."<br>
-            <span style="font-weight: 600; font-size: 0.7rem;">— Casimiro Cunha</span>
+            <span>— Casimiro Cunha</span>
         </div>
     </header>
 
@@ -417,6 +451,20 @@
     </footer>
 
     <script>
+        // 0. LÓGICA DO BOTÃO FLUTUANTE QUE SOME
+        const btnFlutuante = document.getElementById('btnFlutuante');
+        btnFlutuante.addEventListener('click', () => {
+            // Conta 2 segundos (2000ms) após o clique e esconde o botão com suavidade
+            setTimeout(() => {
+                btnFlutuante.style.opacity = '0';
+                btnFlutuante.style.transform = 'scale(0.8) translateY(20px)';
+                // Remove do HTML após a animação terminar
+                setTimeout(() => {
+                    btnFlutuante.style.display = 'none';
+                }, 500); 
+            }, 2000);
+        });
+
         // 1. SISTEMA DE BALÕES 3D NATIVOS
         const words = ["FÉ", "AMOR", "PAZ", "CARIDADE", "LUZ", "ESPERANÇA", "BONDADE"];
         const area = document.getElementById('balloonArea');
@@ -425,15 +473,11 @@
             const b = document.createElement('div');
             b.className = 'balloon';
             
-            // Nasce em posições aleatórias na base da tela
             const startX = Math.random() * 90 + 5; 
             b.style.left = startX + 'vw';
             
-            // Tempos diferentes para parecerem orgânicos (10s a 25s subindo)
             const duration = 10 + Math.random() * 15;
             b.style.animation = `floatAndSway ${duration}s linear infinite`;
-            
-            // Atraso aleatório para não subirem todos de uma vez
             b.style.animationDelay = `-${Math.random() * duration}s`;
             
             b.onclick = function() {
@@ -441,7 +485,6 @@
                     b.classList.add('popped');
                     b.innerText = words[Math.floor(Math.random() * words.length)];
                     
-                    // Explosão de confetes onde o balão estourou
                     confetti({
                         particleCount: 40,
                         spread: 70,
@@ -452,7 +495,6 @@
                         colors: ['#FFCA3A', '#FFFFFF', '#E63946']
                     });
 
-                    // Desaparece e recria um novo para a tela nunca ficar vazia
                     setTimeout(() => { b.style.opacity = '0'; }, 1500);
                     setTimeout(() => { b.remove(); createBalloon(); }, 2000);
                 }
@@ -460,7 +502,6 @@
             area.appendChild(b);
         }
 
-        // Solta 8 balões pela tela
         for(let i=0; i<8; i++) createBalloon();
 
         // 2. MÁSCARA DE TELEFONE
