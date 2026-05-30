@@ -1,0 +1,377 @@
+Feito! Atualizei o código com todas as suas alterações.
+
+Retirei as marcações de responsáveis e a seção de apoio, atualizei a descrição da Campanha Camilo Castelo Branco (ficou com um propósito lindo!) e destaquei a data e local de concentração logo no cabeçalho.
+
+Basta copiar o código abaixo e substituir no seu arquivo `index.html`. Lembre-se apenas de colar a sua URL do Google Sheets no final do código novamente!
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Humberto de Campos 2026 | Trindade-GO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Paytone+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E63946;
+            --primary-yellow: #FFCA3A;
+            --bg-color: #F8F9FA;
+            --text-dark: #1D3557;
+            --text-light: #F1FAEE;
+            --green-accent: #2A9D8F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Tipografia de Destaque (Inspirada no Cartaz) */
+        h1, h2, h3 {
+            font-family: 'Paytone One', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-yellow);
+            text-shadow: 3px 3px 0px var(--primary-red);
+            transform: rotate(-2deg);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .info-badge {
+            background: rgba(255,255,255,0.1); 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            display: inline-block; 
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .quote {
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            border-left: 4px solid var(--primary-yellow);
+            display: inline-block;
+            padding-left: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        /* Seções Gerais */
+        .section-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 40px;
+        }
+
+        /* Cards de Programação */
+        .grid-programacao {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid var(--primary-yellow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .tag-green { border-bottom-color: var(--green-accent); }
+        .tag-green h3 { color: var(--green-accent); }
+
+        /* Formulário de Inscrição Disney Level */
+        .form-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #f1f1f1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 0 4px rgba(255, 202, 58, 0.2);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-family: 'Paytone One', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #d62828;
+            transform: scale(1.02);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Mensagem de Sucesso */
+        #mensagem-sucesso {
+            display: none;
+            text-align: center;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-weight: 600;
+            border: 1px solid #c8e6c9;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--text-dark);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Palavras flutuantes decorativas */
+        .floating-word {
+            position: absolute;
+            font-family: 'Paytone One', sans-serif;
+            opacity: 0.1;
+            font-size: 3rem;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="floating-word" style="top: 10%; left: 5%; transform: rotate(-15deg);">FÉ</div>
+        <div class="floating-word" style="top: 70%; right: 10%; transform: rotate(10deg);">AMOR</div>
+        
+        <h1>TRABALHO<br>HUMBERTO DE CAMPOS</h1>
+        <p class="subtitle">Edição 2026 • Trindade - GO</p>
+        
+        <div class="info-badge">
+            <strong>📍 Concentração:</strong> Posto Uma Gotinha de Amor <br> 
+            <strong>📅 14 de Junho</strong> às <strong>14H</strong>
+        </div><br>
+
+        <div class="quote">
+            "Está na luz da Humildade<br>A caridade melhor."<br>
+            <span style="font-size: 0.9rem; font-weight: 600;">— Casimiro Cunha</span>
+        </div>
+    </header>
+
+    <section class="section-container" id="programacao">
+        <h2 class="section-title">Nossas Frentes de Trabalho</h2>
+        
+        <div class="grid-programacao">
+            <div class="card tag-green">
+                <h3>💧 Posto Uma Gotinha de Amor</h3>
+                <p>Pintura externa e interna, pinturas artísticas, iluminação e melhorias nas paredes e estrutura.</p>
+            </div>
+
+            <div class="card">
+                <h3>🎗️ Campanha Camilo Castelo Branco</h3>
+                <p>Campanha de prevenção ao suicídio, com conscientização e esclarecimento por meio de faixas, mensagens de apoio e valorização da vida.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏥 Vila São Cotolengo</h3>
+                <p>Ações de assistência, acolhimento e afeto na instituição.</p>
+            </div>
+
+            <div class="card">
+                <h3>👶👵 Abrigo (Crianças ou Idosos)</h3>
+                <p>Atividades de carinho, acolhimento e interação.</p>
+            </div>
+
+            <div class="card">
+                <h3>🚑 Hospital ou IML</h3>
+                <p>Apoio fraterno e irradiação de paz aos corações que necessitam.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container" style="background-color: #fff; border-radius: 30px; margin-bottom: 60px;">
+        <h2 class="section-title">Vem com a gente! 💛</h2>
+        <p style="text-align: center; margin-top: -30px; margin-bottom: 30px; color: #666;">
+            Preencha seus dados abaixo para se voluntariar. A Secretaria fará a organização e distribuição das atividades.
+        </p>
+
+        <div class="form-container">
+            <form id="inscricaoForm">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Como você gosta de ser chamado(a)?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">WhatsApp</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="centro">Centro Espírita que frequenta</label>
+                    <input type="text" id="centro" name="centro" placeholder="Ex: Casa Espírita Luz e Amor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cidade">Sua Cidade</label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Ex: Goiânia - GO" required>
+                </div>
+
+                <button type="submit" id="btnSubmit">CONFIRMAR MINHA PRESENÇA</button>
+            </form>
+
+            <div id="mensagem-sucesso">
+                ✨ Inscrição recebida com sucesso! Que Jesus te abençoe, nos vemos lá!
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Fraternidade • Fé • Auxílio • Luz • Amor • Bondade</p>
+        <p style="opacity: 0.7; margin-top: 10px; font-size: 0.8rem;">Trabalho Humberto de Campos 2026</p>
+    </footer>
+
+    <script>
+        // COLOQUE AQUI A URL DO SEU GOOGLE APPS SCRIPT
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzbTHcAV6hhkBR-2y7Y7P8zKpP6nhnLSZMEs7jrAbrf4nl9Qqsd9-cU883bxSXa_BShmQ/exec'; 
+        
+        const form = document.getElementById('inscricaoForm');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const mensagemSucesso = document.getElementById('mensagem-sucesso');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // UX: Muda o botão enquanto carrega
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = 'Enviando... 💛';
+
+            // Pega os dados do form
+            let requestBody = new FormData(form);
+
+            fetch(scriptURL, { method: 'POST', body: requestBody })
+                .then(response => {
+                    // UX: Mostra mensagem de sucesso e reseta o formulário
+                    form.style.display = 'none';
+                    mensagemSucesso.style.display = 'block';
+                })
+                .catch(error => {
+                    alert('Ops! Houve um erro na conexão. Tente novamente.');
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = 'CONFIRMAR MINHA PRESENÇA';
+                });
+        });
+    </script>
+</body>
+</html>
+
+```
